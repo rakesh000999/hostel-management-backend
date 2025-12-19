@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/bookings")
-@CrossOrigin("*")
+@CrossOrigin("http://localhost:5173")
 public class BookingController {
 
     @Autowired

@@ -3,6 +3,7 @@ package com.hostel.management.service.impl;
 import com.hostel.management.entity.Booking;
 import com.hostel.management.repository.BookingRepository;
 import com.hostel.management.service.BookingService;
+import com.hostel.management.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +15,14 @@ public class BookingServiceImpl implements BookingService {
     @Autowired
     BookingRepository bookingRepository;
 
+    @Autowired
+    private EmailService emailService;
+
     @Override
     public Booking createBooking(Booking booking) {
-        return bookingRepository.save(booking);
+        Booking savedBooking = bookingRepository.save(booking);
+        emailService.sendBookingEmail(savedBooking);
+        return savedBooking;
     }
 
     @Override
