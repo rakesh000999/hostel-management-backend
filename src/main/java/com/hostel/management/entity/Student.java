@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
+
 @Entity
 @Data
 @Table(name = "students")
@@ -16,9 +18,11 @@ public class Student {
 
     private String name;
 
-    private int age;
+    private int dob;
 
     private String gender;
+
+    private String nationality;
 
     @Column(unique = true)
     private String email;
@@ -27,11 +31,26 @@ public class Student {
 
     private String address;
 
+    @Column(name = "check_in_date")
+    private LocalDate checkInDate;
+
+    @Column(name = "check_out_date")
+    private LocalDate checkOutDate;
+
     @Column(name = "guardian_name")
     private String guardianName;
 
     @Column(name = "guardian_contact")
     private String guardianContact;
+
+    @Column(name = "emergency_contact", nullable = false)
+    private String emergencyContact;
+
+    @Column(name = "identity_document_path")
+    private String identityDocumentPath;
+
+    @Column(name = "photo_path")
+    private String photoPath;
 
     @ManyToOne
     @JoinColumn(name = "room_id")
@@ -52,14 +71,6 @@ public class Student {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     public String getGender() {
@@ -123,7 +134,7 @@ public class Student {
         return "Student{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", age=" + age +
+                ", dob=" + dob +
                 ", gender='" + gender + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +

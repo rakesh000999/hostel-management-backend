@@ -27,18 +27,42 @@ public class SecurityConfig {
 //        return http.build();
 //    }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+//    http
+//            .csrf(csrf -> csrf.disable())
+//            .authorizeHttpRequests(requests -> requests
+//                    .requestMatchers("/api/students/**").permitAll()
+//                    .requestMatchers("/api/rooms/**").permitAll()
+//                    .requestMatchers("/api/bookings/**").permitAll()
+//                            .requestMatchers("/api/attendance/**").permitAll()
+//                            .requestMatchers("/api/fees/**").permitAll()
+//                            .requestMatchers("/api/staff/**").permitAll()
+//                            .requestMatchers("/api/students/room/**").permitAll()
+//
+//
+////                            .requestMatchers("/api/**").permitAll()
+//                    .anyRequest().authenticated()
+//            )
+//            .oauth2Login(Customizer.withDefaults());
+//
+//    return http.build();
+//    }
+
+
+
+
+
+@Bean
+public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
             .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(requests -> requests
-                    .requestMatchers("/api/students/**").permitAll()
-                    .requestMatchers("/api/rooms/**").permitAll()
-                    .requestMatchers("/api/bookings/**").permitAll()
-                    .anyRequest().authenticated()
-            )
-            .oauth2Login(Customizer.withDefaults());
+            .authorizeHttpRequests(auth -> auth
+                    .requestMatchers("/api/**").permitAll()
+                    .anyRequest().permitAll()
+            );
+
     return http.build();
-    }
+}
 
 }

@@ -4,7 +4,9 @@ import com.hostel.management.entity.Student;
 import com.hostel.management.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -22,9 +24,14 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @PostMapping("/room/{roomId}")
-    public Student createStudent(@PathVariable Long roomId, @RequestBody Student student){
-        return studentService.createStudent(student, roomId);
+    @PostMapping(value = "/room/{roomId}", consumes = "multipart/form-data")
+    public Student createStudent(
+            @PathVariable Long roomId,
+            @ModelAttribute Student student,
+            @RequestParam("photo") MultipartFile photo,
+            @RequestParam("identityDocument") MultipartFile identityDocument
+    ) throws IOException {
+        return studentService.createStudent(student, roomId, photo, identityDocument);
     }
 
     @GetMapping
