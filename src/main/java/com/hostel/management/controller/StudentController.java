@@ -30,7 +30,7 @@ public class StudentController {
             @ModelAttribute Student student,
             @RequestParam("photo") MultipartFile photo,
             @RequestParam("identityDocument") MultipartFile identityDocument
-    ) throws IOException {
+    ) throws Exception {
         return studentService.createStudent(student, roomId, photo, identityDocument);
     }
 

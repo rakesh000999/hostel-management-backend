@@ -52,6 +52,20 @@ public class Student {
     @Column(name = "photo_path")
     private String photoPath;
 
+    @Lob
+    @Column(name = "photo_aes_key")
+    private byte[] photoAesKey;
+
+    @Lob
+    @Column(name = "identity_aes_key")
+    private byte[] identityAesKey;
+
+    @Column(name = "photo_content_type")
+    private String photoContentType;
+
+    @Column(name = "identity_content_type")
+    private String identityContentType;
+
     @ManyToOne
     @JoinColumn(name = "room_id")
     @JsonBackReference

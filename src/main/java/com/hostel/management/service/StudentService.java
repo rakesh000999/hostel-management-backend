@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface StudentService {
-    Student createStudent(Student student, Long roomId, MultipartFile photo, MultipartFile identityDocument) throws IOException;
+    Student createStudent(Student student, Long roomId, MultipartFile photo, MultipartFile identityDocument) throws Exception;
     List<Student> getAllStudent();
     Student getStudentById(Long id);
     Student updateStudent(Long id, Student student);
