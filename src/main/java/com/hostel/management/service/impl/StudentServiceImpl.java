@@ -55,6 +55,7 @@ public class StudentServiceImpl implements StudentService {
 
             byte[] originalBytes = photoPath.getBytes();
 
+            // generate unique AES-256 key
             SecretKey aesKey = AESUtil.generateKey();
             byte[] encryptedBytes = AESUtil.encrypt(originalBytes, aesKey);
 
@@ -85,7 +86,8 @@ public class StudentServiceImpl implements StudentService {
             savedStudent.setIdentityDocumentPath(encryptedFile.getAbsolutePath());
             savedStudent.setIdentityAesKey(AESUtil.keyToBytes(aesKey));
 
-            // store MIME type
+            // store MIME type , Multipurpose Internet Mail Extensions
+            // helps the browser decide
             savedStudent.setIdentityContentType(identityDocumentPath.getContentType());
         }
 

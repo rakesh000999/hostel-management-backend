@@ -2,6 +2,7 @@ package com.hostel.management.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.util.List;
@@ -16,14 +17,22 @@ public class Room {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "room_number", nullable = false)
+    @NotBlank(message = "Room number cannot be empty")
+    @Pattern(
+            regexp = "^[A-Za-z0-9-]+$",
+            message = "Room number can contain only letters, numbers, and hyphens"
+    )
+    @Column(name = "room_number", nullable = false, unique = true)
     private String roomNumber;
 
+    @Positive (message = "Capacity must be greater than zero")
     private int capacity;
 
+    @PositiveOrZero(message = "Occupied count cannot be negative")
     @Column(name = "occupied_count")
     private int occupiedCount;
 
+    @DecimalMin(value = "0.0", inclusive = true, message = "Rent cannot be negative")
     @Column(name = "rent_per_month")
     private double rentPerMonth;
 
